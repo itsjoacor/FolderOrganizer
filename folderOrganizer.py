@@ -59,29 +59,21 @@ def folderType():
     else:
         return
 
-# pruebas a ignorar
-# def isItMonthFolder():
-#     global month_list, x
-#     month_list = list(calendar.month_name)
-#     del month_list[0]
-#     for f in range(0, len(list_of_files)):
-#         if file_name == month_list[x] and folderType():
-#             x += 1
-#             print("1")
-#             return True
-
-#         else:
-#             return
 
 
-
-
-for month in range(0, len(month_list)):
-    if not "December":
-        print("It is not on the list")
-        break
+#
+# ESTO ES LO QUE NO PUEDO LLEVAR A CABO CORRECTAMENTE 
+# Se hace una sola vez y el programa no sigue con el resto de los archivos
+# De igual menera no se bien como hacer para corroborar si el la carpeta del mes del arvhico a organizar ya existe o no
+for file in list_of_files:
+    if os.path.exists("/home/joaquin/Documents/Downloading/{}".format(month_of_file)) and folderType():
+        onlyFolderMoving()
+        position += 1
     else:
-        print("It is on the list")
+        creatingAndFolderMoving()
+        position += 1
+
+
         
         
         
@@ -105,3 +97,17 @@ for month in range(0, len(month_list)):
 #
 #
 #
+# pruebas a ignorar
+# def isItMonthFolder():
+#     global month_list, x
+#     month_list = list(calendar.month_name)
+#     del month_list[0]
+#     for f in range(0, len(list_of_files)):
+#         if file_name == month_list[x] and folderType():
+#             x += 1
+#             print("1")
+#             return True
+
+#         else:
+#             return
+
