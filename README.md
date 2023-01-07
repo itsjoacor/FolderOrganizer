@@ -1,8 +1,5 @@
---------------------------------------------------------------------------------------------------------------------
--                                                                                                                  -
--                                            Download folder organizer                                             -
--                                                                                                                  -
---------------------------------------------------------------------------------------------------------------------
+                                         #Download folder organizer#                                           
+
 
 La idea del programa es que al ingresarle el path de una carpeta ej: "/home/joaquin/Documents/Downloading/" me organice todos los archivos-
 que se encuentran dentro de esa carpeta en subcarpetas mensuales conteniendo todos los archivos de un mismo mes.
