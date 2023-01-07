@@ -1,4 +1,4 @@
-                                         #Download folder organizer#                                           
+Folder Organizer                                          
 
 
 La idea del programa es que al ingresarle el path de una carpeta ej: "/home/joaquin/Documents/Downloading/" me organice todos los archivos-
