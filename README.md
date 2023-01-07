@@ -6,6 +6,9 @@ que se encuentran dentro de esa carpeta en subcarpetas mensuales conteniendo tod
 
 En conclusion, el programa hace:
 
+(para acceder a los diferentes se listaon los archivos en el directorio seleccionado y asi poder acceder e ir recorriendo la lista segun un contador-
+de  posiciones comenzando desde la posicion cero)
+
 Opcion 1-
 Si el archivo que selecciono pertenece al mes X y no existe una carpeta del mes X que la cree y mueva el archivo a esa carpeta.
 
