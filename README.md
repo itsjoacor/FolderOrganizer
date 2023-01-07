@@ -1,9 +1,9 @@
-####################################################################################################################
+--------------------------------------------------------------------------------------------------------------------
 #                                       Download folder organizer                                                  #
 #      This program will create a folder for each month and move all the files from that month into one folder     #
 #                                                                                                                  #
 #    The aim of this program is to organize and have a clean layout of the download folder in your system          #
-####################################################################################################################
+--------------------------------------------------------------------------------------------------------------------
 
 La idea del programa es que al ingresarle el path de una carpeta ej: "/home/joaquin/Documents/Downloading/" me organice todos los archivos-
 que se encuentran dentro de esa carpeta en subcarpetas mensuales conteniendo todos los archivos de un mismo mes.
