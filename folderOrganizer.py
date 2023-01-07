@@ -8,16 +8,24 @@ import shutil
 position = 0
 x = 0
 
+
+
 # Path to organize - directorio a organizar
 path_to_organize = "/home/joaquin/Documents/Downloading/"
+
+
 
 # Files to organize- listando archivos en el directorio a organizar.
 list_of_files = os.listdir(path_to_organize)
 print(f"This are the files to be organized {list_of_files} ")
 file_name = os.path.basename("/home/joaquin/Documents/Downloading/{}".format(list_of_files[position]))
 
+
+
 # Path to file - accediendo al archivo segun posicion en el listado
 path_to_file = "/home/joaquin/Documents/Downloading/{}".format(list_of_files[position])
+
+
 
 # Extracting month of the file -extrayendo el mes del archivo para saber que carpeta crear
 create_time = os.path.getctime(path_to_file)
@@ -27,17 +35,21 @@ month_int = int(extract_month[4:6])
 month_of_file = (calendar.month_name[month_int])
 month_list = list(calendar.month_name)
 
+
+
 # Moving paths - carpeta a crear - archivo a mover - destino donde se mueve el "source_file"- respectivo orden
 new_folder = "/home/joaquin/Documents/Downloading/{}".format(month_of_file)
 source_file = "/home/joaquin/Documents/Downloading/{}".format(list_of_files[position])
 destination_folder = new_folder
 
+
+
 # Extracting file type- extrayendo el tipo del archivo
 _, file_extension = os.path.splitext("/home/joaquin/Documents/Downloading/{}".format(list_of_files[position]))
 
 
-# Actions to be made - que haceres
 
+# Actions to be made - que haceres
 # creando carpeta y moviendo archivo del mismo mes a esa carpeta
 def creatingAndFolderMoving():
     global new_folder, position, destination_folder, source_file
@@ -46,11 +58,13 @@ def creatingAndFolderMoving():
     shutil.move(source_file, destination_folder)
     print("folder moved correctly")
 
+    
 # solo mueve el archivo a la carpeta (la carpeta del mes fue creada ya por otro arvhico previamente)
 def onlyFolderMoving():
     global source_file, destination_folder
     shutil.move(source_file, destination_folder)
 
+    
     
 #retorna si el tipo de archivo es una carpeta o no
 def folderType():
