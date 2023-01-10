@@ -19,35 +19,15 @@ def moveFile(file_to_organize, path, folder):
     shutil.move(file_to_organize, destination_folder)
 
 
-def inputObtain():
-    path_to_organize = entry.get()
-    list_of_files = os.listdir(path_to_organize)
-    for file in list_of_files:
-        path_to_file = path_to_organize + file
-        create_time = os.path.getmtime(path_to_file)
-        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
-        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
-        month_name = calendar.month_name[create_month]
-        new_folder_name = f"{month_name}-{year_created}"
-        if not os.path.exists(path_to_organize + new_folder_name):
-            createFolder(path_to_organize, new_folder_name)
-            moveFile(file, path_to_organize, new_folder_name)
-        else:
-            moveFile(file, path_to_organize, new_folder_name)
-
 
 # Function modifying the organizing regimen
 # Creation date or Last modified
 def byCreationDate():
-    global create_time
-    create_time = os.path.getctime(path_to_file)
-    print(create_time)
+    last_or_creation = os.path.getctime(path_to_file)
 
 
 def byLastModifiedDate():
-    global create_time
-    create_time = os.path.getmtime(path_to_file)
-    print(create_time)
+    last_or_creation = os.path.getmtime(path_to_file)
 
 
 def Instructions():
@@ -66,7 +46,32 @@ def quitProgram():
     root.destroy()
 
 
-# #Listing the files on the path organizing
+def successfulProgram():
+    suc_prog = tk.Toplevel()
+    suc_prog.title('Popup Window')
+    suc_prog.geometry("100x100")
+    label_suc = tk.Label(suc_prog, text='Program run successfully!')
+    label_suc.pack(padx=10, pady=10)
+
+
+def runningProgram():
+    path_to_organize = entry.get()
+    list_of_files = os.listdir(path_to_organize)
+    for file in list_of_files:
+        path_to_file = path_to_organize + file
+        create_time = last_or_creation
+        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
+        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
+        month_name = calendar.month_name[create_month]
+        new_folder_name = f"{month_name}-{year_created}"
+        if not os.path.exists(path_to_organize + new_folder_name):
+            createFolder(path_to_organize, new_folder_name)
+            moveFile(file, path_to_organize, new_folder_name)
+        else:
+            moveFile(file, path_to_organize, new_folder_name)
+    successfulProgram()
+
+
 
 
 """
@@ -101,7 +106,7 @@ entry = Entry(root, width=40, highlightbackground="#000000", font=('Times New Ro
 entry.place(
     x=165, y=200)
 Button(root, text='Submit', highlightbackground="#000000", width=8, font=('Times New Roman', 13), bg='#FFF1F0',
-       command=inputObtain).place(
+       command=runningProgram).place(
     x=300, y=235)
 Button(root, text='How does this work?', highlightbackground="#0072ff", width=15, bd=0, font=('Times New Roman', 13,),
        bg='#b2b2b2',
