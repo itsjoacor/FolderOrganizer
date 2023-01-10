@@ -6,9 +6,33 @@ import calendar
 import os
 import shutil
 
+# Bool variable for selecting which way to organize folders.
 button_bool = True
 
 
+# Copy and Paste menu
+
+def pop_menu(event):
+    menu.tk_popup(event.x_root, event.y_root)
+
+
+def copy():
+    entry.event_generate("<<Copy>>")
+
+
+def cut():
+    entry.event_generate("<<Cut>>")
+
+
+def paste():
+    entry.event_generate("<<Paste>>")
+
+
+def select_all():
+    entry.event_generate("<<SelectAll>>")
+
+
+# Program itself functions
 # Function creating folder named after month of the file
 def createFolder(path, date):
     os.chdir(path)
@@ -131,6 +155,19 @@ Button(root, text='Quit', highlightbackground="#ff0000", width=15, bd=0, font=('
        command=quitProgram).place(
     x=30, y=305)
 
-# Initiating the window
+# Right Click Menu
+menu = Menu(tearoff=0, bg="#b2b2b2", fg="white")
+# options
+menu.add_command(label="Copy", command=copy, foreground="black")
+menu.add_command(label="Cut", command=cut, foreground="black")
+menu.add_separator()
+menu.add_command(label="Paste", command=paste, foreground="black")
+menu.add_separator()
+menu.add_command(label="Select All", command=select_all, foreground="black")
+
+# Make the menu pop up
+root.bind("<Button - 3>", pop_menu)
+
 root.update()
 root.mainloop()
+
