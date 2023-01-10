@@ -1,21 +1,21 @@
 Folder Organizer                                          
 
+This program should help you stay organized on your computers.
+This will organize any messy folder you might have.
 
-La idea del programa es que al ingresarle el path de una carpeta ej: "/home/joaquin/Documents/Downloading/" me organice todos los archivos-
-que se encuentran dentro de esa carpeta en subcarpetas mensuales conteniendo todos los archivos de un mismo mes.
-
-En conclusion, el programa hace:
-
-(para acceder a los diferentes se listaon los archivos en el directorio seleccionado y asi poder acceder e ir recorriendo la lista segun un contador-
-de  posiciones comenzando desde la posicion cero)
-
-Opcion 1-
-Si el archivo que selecciono pertenece al mes X y no existe una carpeta del mes X que la cree y mueva el archivo a esa carpeta.
-
-Opcion 2-
-Si la carpeta del mes X igual al mes del archivo existe, que solo mueva el archivo ahi dentro.
+It is a simple program which aims to organize all the files in certain path you choose and it will create monthly-yeared-named-folders depending on the files there are on the path.
+It will only create a month-named-folder for all the files bolonging to the same month. Yet, there can be several month-named-folders if the files belong to the same month but not the same year.
 
 
-*No puede haber previamente una carpeta con el nombre de alguno de los meses igual a los archivos.
-*Eventualmente agregarle UI para que sea mas accesible a las personas que puedan no entender
-como ir modificando los direcotorios etc directamente desde el codigo.
+INSTRUCTIONS
+-First chose how you want to organize your files and click:
+    A-Organize by last modification date 
+    B-Organize by creation date
+-Then copy the path and paste it on th blank space, click submit.
+At this point there is no return, the progeam should have worked propperly.
+    Disclaimer:
+    *Not any of your files will be deleted.
+    *For the program to work correctly, there should not be any folder named after a month
+    *folder name structure: "Month-Year"
+
+            Thanks for using the FOLDER ORGANIZER!
