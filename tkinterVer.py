@@ -8,7 +8,7 @@ import shutil
 
 
 # Function creating folder named after month of the file
-def createFolder(path: str, date: str):
+def createFolder(path, date):
     os.chdir(path)
     os.makedirs(date)
 
@@ -19,15 +19,32 @@ def moveFile(file_to_organize, path, folder):
     shutil.move(file_to_organize, destination_folder)
 
 
+def runningProgram():
+    path_to_organize = entry.get()
+    list_of_files = os.listdir(path_to_organize)
+    for file in list_of_files:
+        path_to_file = path_to_organize + file
+        create_time = os.path.getctime(path_to_file)
+        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
+        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
+        month_name = calendar.month_name[create_month]
+        new_folder_name = f"{month_name}-{year_created}"
+        if not os.path.exists(path_to_organize + new_folder_name):
+            createFolder(path_to_organize, new_folder_name)
+            moveFile(file, path_to_organize, new_folder_name)
+        else:
+            moveFile(file, path_to_organize, new_folder_name)
+    successfulProgram()
+
 
 # Function modifying the organizing regimen
 # Creation date or Last modified
 def byCreationDate():
-    last_or_creation = os.path.getctime(path_to_file)
+    create_time = os.path.getctime(path_to_file)
 
 
 def byLastModifiedDate():
-    last_or_creation = os.path.getmtime(path_to_file)
+    create_time = os.path.getmtime(path_to_file)
 
 
 def Instructions():
@@ -49,29 +66,12 @@ def quitProgram():
 def successfulProgram():
     suc_prog = tk.Toplevel()
     suc_prog.title('Popup Window')
-    suc_prog.geometry("100x100")
+    suc_prog.geometry("300x100")
     label_suc = tk.Label(suc_prog, text='Program run successfully!')
     label_suc.pack(padx=10, pady=10)
 
 
-def runningProgram():
-    path_to_organize = entry.get()
-    list_of_files = os.listdir(path_to_organize)
-    for file in list_of_files:
-        path_to_file = path_to_organize + file
-        create_time = last_or_creation
-        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
-        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
-        month_name = calendar.month_name[create_month]
-        new_folder_name = f"{month_name}-{year_created}"
-        if not os.path.exists(path_to_organize + new_folder_name):
-            createFolder(path_to_organize, new_folder_name)
-            moveFile(file, path_to_organize, new_folder_name)
-        else:
-            moveFile(file, path_to_organize, new_folder_name)
-    successfulProgram()
-
-
+# #Listing the files on the path organizing
 
 
 """
