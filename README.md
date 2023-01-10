@@ -4,7 +4,8 @@
     This will organize any messy folder you might have.
 
     It is a simple program which aims to organize all the files in certain path you choose and it will create monthly-yeared-named-folders depending on the files there are on the path.
-    It will only create a month-named-folder for all the files bolonging to the same month. Yet, there can be several month-named-folders if the files      belong   to the same month but not the same year.
+    It will only create a month-named-folder for all the files bolonging to the same month. 
+    Yet, there can be several month-named-folders if the files  belong to the same month but not the same year.
 
 
     INSTRUCTIONS
