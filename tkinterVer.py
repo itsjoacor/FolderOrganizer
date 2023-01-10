@@ -8,17 +8,19 @@ import shutil
 
 
 # Function creating folder named after month of the file
+# Crea carpeta con nombre del mes del archivo
 def createFolder(path, date):
     os.chdir(path)
     os.makedirs(date)
 
 
 # Function moving the file to its designated folder
+# mueve el archivo seleecionado a su carpeta mensual
 def moveFile(file_to_organize, path, folder):
     destination_folder = path + folder
     shutil.move(file_to_organize, destination_folder)
 
-
+# corre el programa
 def runningProgram():
     path_to_organize = entry.get()
     list_of_files = os.listdir(path_to_organize)
@@ -38,15 +40,15 @@ def runningProgram():
 
 
 # Function modifying the organizing regimen
-# Creation date or Last modified
+# deberia modificar el tipo de organizacion que se quiere - fecha de creacion
 def byCreationDate():
     create_time = os.path.getctime(path_to_file)
 
-
+# deberia modificar el tipo de organizacion que se quiere - fecha de ultima modificacion
 def byLastModifiedDate():
     create_time = os.path.getmtime(path_to_file)
 
-
+# Pop-up con manual de instrucciones
 def Instructions():
     popup = tk.Toplevel()
     popup.title('Popup Window')
@@ -54,15 +56,15 @@ def Instructions():
     label = tk.Label(popup, text='This is where instructions should be')
     label.pack(padx=10, pady=10)
 
-
+# Inicia el pop-up
 def openPopoUp():
     Instructions()
 
-
+# Finaliza con el programa en caso de abortar
 def quitProgram():
     root.destroy()
 
-
+# Pop-up con mensaje de programa ejecutado correctamente
 def successfulProgram():
     suc_prog = tk.Toplevel()
     suc_prog.title('Popup Window')
@@ -71,16 +73,10 @@ def successfulProgram():
     label_suc.pack(padx=10, pady=10)
 
 
-# #Listing the files on the path organizing
 
 
-"""
-After obtaining the necessary date information for each file
-It checks if there is a folder named after the month of the file analyzing-
-if there is, it moves the file into that folder. Otherwise, it creates a folder-
-named the month of the file analyzing and moves the file into it.
-"""
 
+# Inicializazcion ventana tkinter
 root = Tk()
 root.title("Folder Organizer Program")
 root.geometry('700x350')
@@ -116,6 +112,6 @@ Button(root, text='Quit', highlightbackground="#ff0000", width=15, bd=0, font=('
        command=quitProgram).place(
     x=30, y=305)
 
-# Initiating the window
+# Correr ventana tkinter
 root.update()
 root.mainloop()
