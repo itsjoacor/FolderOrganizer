@@ -13,7 +13,7 @@
         A-Organize by last modification date 
         B-Organize by creation date
     -Then copy the path and paste it on th blank space, click submit.
-    At this point there is no return, the progeam should have worked propperly.
+    At this point there is no return, the program should have worked propperly.
         Disclaimer:
         *Not any of your files will be deleted.
         *For the program to work correctly, there should not be any folder named after a month
