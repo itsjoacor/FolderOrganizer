@@ -47,6 +47,13 @@ def byCreationDate():
 # deberia modificar el tipo de organizacion que se quiere - fecha de ultima modificacion
 def byLastModifiedDate():
     create_time = os.path.getmtime(path_to_file)
+    
+ """
+ La idea es que el usuario tambien pueda decidir el tipo de organizacion que quiera, si por creacion del archivo o por ultima modificacion.
+ Esto se aplicacria a todos los archivos en el path a organizar.
+ Lo que harian estos botones es cambiar el contenido de la variable create_time y asi modificarlo a getmtime o getctime, respectivamente.
+ el problema es que no puedo lograr llamar la variable por fuera de la funcion, no se como hacer eso en una funcion o vice versa.
+ """
 
 # Pop-up con manual de instrucciones
 def Instructions():
