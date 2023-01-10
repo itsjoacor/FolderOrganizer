@@ -1,127 +1,136 @@
+# Importing the required libraries
+from tkinter import *
+import tkinter as tk
 import datetime
 import calendar
 import os
 import shutil
 
-# falta organizar y definierlo en clases para mas organizacion. Pero hasta que no ande no se hace jajaja XD.
-# Counters and accessories- contadores y accesorios
-position = 0
-x = 0
+button_bool = True
 
 
-
-# Path to organize - directorio a organizar
-path_to_organize = "/home/joaquin/Documents/Downloading/"
-
-
-
-# Files to organize- listando archivos en el directorio a organizar.
-list_of_files = os.listdir(path_to_organize)
-print(f"This are the files to be organized {list_of_files} ")
-file_name = os.path.basename("/home/joaquin/Documents/Downloading/{}".format(list_of_files[position]))
+# Function creating folder named after month of the file
+def createFolder(path, date):
+    os.chdir(path)
+    os.makedirs(date)
 
 
-
-# Path to file - accediendo al archivo segun posicion en el listado
-path_to_file = "/home/joaquin/Documents/Downloading/{}".format(list_of_files[position])
-
-
-
-# Extracting month of the file -extrayendo el mes del archivo para saber que carpeta crear
-create_time = os.path.getctime(path_to_file)
-create_date = str(datetime.datetime.fromtimestamp(create_time).strftime("%Y%m%d%H%M%S"))
-extract_month = str(create_date)
-month_int = int(extract_month[4:6])
-month_of_file = (calendar.month_name[month_int])
-month_list = list(calendar.month_name)
+# Function moving the file to its designated folder
+def moveFile(file_to_organize, path, folder):
+    destination_folder = path + folder
+    shutil.move(file_to_organize, destination_folder)
 
 
-
-# Moving paths - carpeta a crear - archivo a mover - destino donde se mueve el "source_file"- respectivo orden
-new_folder = "/home/joaquin/Documents/Downloading/{}".format(month_of_file)
-source_file = "/home/joaquin/Documents/Downloading/{}".format(list_of_files[position])
-destination_folder = new_folder
-
-
-
-# Extracting file type- extrayendo el tipo del archivo
-_, file_extension = os.path.splitext("/home/joaquin/Documents/Downloading/{}".format(list_of_files[position]))
-
-
-
-# Actions to be made - que haceres
-# creando carpeta y moviendo archivo del mismo mes a esa carpeta
-def creatingAndFolderMoving():
-    global new_folder, position, destination_folder, source_file
-    global position
-    os.makedirs(new_folder)
-    shutil.move(source_file, destination_folder)
-    print("folder moved correctly")
-
-    
-# solo mueve el archivo a la carpeta (la carpeta del mes fue creada ya por otro arvhico previamente)
-def onlyFolderMoving():
-    global source_file, destination_folder
-    shutil.move(source_file, destination_folder)
-
-    
-    
-#retorna si el tipo de archivo es una carpeta o no
-def folderType():
-    if file_extension == "":
-        return True
-    else:
-        return
+# Program
+def runningProgram():
+    path_to_organize = entry.get()
+    list_of_files = os.listdir(path_to_organize)
+    for file in list_of_files:
+        path_to_file = path_to_organize + file
+        if button_bool:
+            create_time = os.path.getctime(path_to_file)
+            print(create_time)
+        else:
+            create_time = os.path.getmtime(path_to_file)
+            print(create_time)
+        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
+        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
+        month_name = calendar.month_name[create_month]
+        new_folder_name = f"{month_name}-{year_created}"
+        if not os.path.exists(path_to_organize + new_folder_name):
+            createFolder(path_to_organize, new_folder_name)
+            moveFile(file, path_to_organize, new_folder_name)
+        else:
+            moveFile(file, path_to_organize, new_folder_name)
+    successfulProgram()
 
 
+# Function modifying the organizing regimen
+# Creation date or Last modified
 
-#
-# ESTO ES LO QUE NO PUEDO LLEVAR A CABO CORRECTAMENTE 
-# Se hace una sola vez y el programa no sigue con el resto de los archivos
-# De igual menera no se bien como hacer para corroborar si el la carpeta del mes del arvhico a organizar ya existe o no
-for file in list_of_files:
-    if os.path.exists("/home/joaquin/Documents/Downloading/{}".format(month_of_file)) and folderType():
-        onlyFolderMoving()
-        position += 1
-    else:
-        creatingAndFolderMoving()
-        position += 1
+def byCreationDate():
+    global button_bool
+    button_bool = True
 
 
-        
-        
-        
-        
-        
-        
-# pruebas de como acceder a los archivos en la lista y crear y mover etc.
-# for i in list_of_files:
-#     if file_name == month_of_file and folderType() == "Folder":
-#         onlyFolderMoving()
-#     elif new_folder:
-#         onlyFolderMoving()
+def byModificationDate():
+    global button_bool
+    button_bool = False
 
-# for file in list_of_files:
-#     if os.path.exists("/home/joaquin/Documents/Downloading/{}".format(month_of_file)) and folderType():
-#         onlyFolderMoving()
-#         position += 1
-#     else:
-#         creatingAndFolderMoving()
-#         position += 1
-#
-#
-#
-# pruebas a ignorar
-# def isItMonthFolder():
-#     global month_list, x
-#     month_list = list(calendar.month_name)
-#     del month_list[0]
-#     for f in range(0, len(list_of_files)):
-#         if file_name == month_list[x] and folderType():
-#             x += 1
-#             print("1")
-#             return True
 
-#         else:
-#             return
+# Pop-up windows with instructions to follow in case not understanding how the program works
+def Instructions():
+    popup = tk.Toplevel()
+    popup.title("Folder Organizer Instructions")
+    popup.geometry("600x300")
+    label = tk.Label(popup, justify="left", text="""
+    INSTRUCTIONS
+-First chose how you want to organize your files and click it
+    A-Organize by last modification date 
+    B-Organize by creation date
+-Then copy the path and paste it on th blank space, click submit.
+At this point there is no return.
+    Disclaimer:
+    *Not any of your files will be deleted.
+    *For the program to work properly there should not be any folder named after a month
+            Thanks for using the FOLDER ORGANIZER!
+    """)
+    label.pack(padx=10, pady=10)
 
+
+def openPopoUp():
+    Instructions()
+
+
+def quitProgram():
+    root.destroy()
+
+
+# Runs a pop-up window establishing that the program run correctly
+def successfulProgram():
+    suc_prog = tk.Toplevel()
+    suc_prog.title('Folder Organizer')
+    suc_prog.geometry("300x100")
+    label_suc = tk.Label(suc_prog, text='Program run successfully!')
+    label_suc.pack(padx=10, pady=10)
+
+
+# Initializing Tk window
+root = Tk()
+root.title("Folder Organizer Program")
+root.geometry('700x350')
+root.resizable(False, False)
+root.config(bg='#b2b2b2')
+
+# Window body
+Label(root, text='Welcome to the Folder Organizer', font=('Calibre', 15), anchor="center", bg='#b2b2b2',
+      wraplength=300).place(x=240, y=10)
+Button(root, text='Organize by last modification date', highlightbackground="#000000", width=30,
+       font=('Times New Roman', 13), bg='#FFF1F0',
+       command=byModificationDate).place(
+    x=35, y=105)
+Button(root, text='Organize by creation date', highlightbackground="#000000", width=30, font=('Times New Roman', 13),
+       bg='#FFF1F0',
+       command=byCreationDate).place(
+    x=370, y=105)
+Label(root, text='Insert the path you want to organize below: ', justify="right", font=('Comic Sans bold', 10),
+      bg='#b2b2b2',
+      wraplength=300).place(x=205, y=180)
+
+entry = Entry(root, width=40, highlightbackground="#000000", font=('Times New Roman', 13), bg="#FFF1F0")
+entry.place(
+    x=165, y=200)
+Button(root, text='Submit', highlightbackground="#000000", width=8, font=('Times New Roman', 13), bg='#FFF1F0',
+       command=runningProgram).place(
+    x=300, y=235)
+Button(root, text='How does this work?', highlightbackground="#0072ff", width=15, bd=0, font=('Times New Roman', 13,),
+       bg='#b2b2b2',
+       command=openPopoUp).place(
+    x=510, y=305)
+Button(root, text='Quit', highlightbackground="#ff0000", width=15, bd=0, font=('Times New Roman', 13,), bg='#b2b2b2',
+       command=quitProgram).place(
+    x=30, y=305)
+
+# Initiating the window
+root.update()
+root.mainloop()
