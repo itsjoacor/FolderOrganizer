@@ -37,30 +37,6 @@ def moveFile(file_to_organize, path, folder):
     shutil.move(file_to_organize, destination_folder)
 
 
-# Program
-def runningProgram():
-    path_to_organize = entry.get()
-    list_of_files = os.listdir(path_to_organize)
-    for file in list_of_files:
-        path_to_file = path_to_organize + file
-        if button_bool:
-            create_time = os.path.getctime(path_to_file)
-            print(create_time)
-        else:
-            create_time = os.path.getmtime(path_to_file)
-            print(create_time)
-        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
-        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
-        month_name = calendar.month_name[create_month]
-        new_folder_name = f"{month_name}-{year_created}"
-        if not os.path.exists(path_to_organize + new_folder_name):
-            createFolder(path_to_organize, new_folder_name)
-            moveFile(file, path_to_organize, new_folder_name)
-        else:
-            moveFile(file, path_to_organize, new_folder_name)
-    successfulProgram()
-
-
 # Function modifying the organizing regimen
 # Creation date or Last modified
 
@@ -93,11 +69,11 @@ At this point there is no return.
     """)
     label.pack(padx=10, pady=10)
 
-# Opens instructions pop-up window
+
 def openPopoUp():
     Instructions()
 
-# Aborts program
+
 def quitProgram():
     root.destroy()
 
@@ -109,6 +85,30 @@ def successfulProgram():
     suc_prog.geometry("300x100")
     label_suc = tk.Label(suc_prog, text='Program run successfully!')
     label_suc.pack(padx=10, pady=10)
+
+
+# Program
+def runningProgram():
+    path_to_organize = entry.get()
+    list_of_files = os.listdir(path_to_organize)
+    for file in list_of_files:
+        path_to_file = path_to_organize + file
+        if button_bool:
+            create_time = os.path.getctime(path_to_file)
+            print(create_time)
+        else:
+            create_time = os.path.getmtime(path_to_file)
+            print(create_time)
+        create_month = int(datetime.datetime.fromtimestamp(create_time).strftime("%m"))
+        year_created = int(datetime.datetime.fromtimestamp(create_time).strftime("%Y"))
+        month_name = calendar.month_name[create_month]
+        new_folder_name = f"{month_name}-{year_created}"
+        if not os.path.exists(path_to_organize + new_folder_name):
+            createFolder(path_to_organize, new_folder_name)
+            moveFile(file, path_to_organize, new_folder_name)
+        else:
+            moveFile(file, path_to_organize, new_folder_name)
+    successfulProgram()
 
 
 # Initializing Tk window
